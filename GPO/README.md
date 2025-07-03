@@ -2,6 +2,19 @@
 
 Eine Sammlung von PowerShell-Tools für das effiziente Exportieren und Importieren von Group Policy Objects (GPOs) in Windows-Domänenumgebungen.
 
+
+## Inhaltsverzeichnis
+
+- **[GPO-Export.ps1](#gpo-exportps1)**
+  - [Funktionen](#funktionen)
+  - [Verwendung](#verwendung)
+  - [Parameter](#parameter)
+- **[GPO-Import.ps1](#gpo-importps1)**
+  - [Funktionen](#funktionen-1)
+  - [Verwendung](#verwendung-1)
+  - [Parameter](#parameter-1)
+  - [Ausgabe-Struktur](#ausgabe-struktur)
+
  ## GPO-Export.ps1
 > Stand: 30.06.2025
 
@@ -56,7 +69,7 @@ Eine Sammlung von PowerShell-Tools für das effiziente Exportieren und Importier
 - **Interaktive Auswahl** der zu importierenden GPOs
 - **Mehrfach-Auswahl von GPOs** (z.B. `1-6, 9, 10, 14-22`) für effiziente Massenbearbeitung
 - **Parameter-Support** für automatisierte Ausführung in Cronjobs 
-- 
+
 ### Verwendung
 
 #### Komplett interaktiver Modus
