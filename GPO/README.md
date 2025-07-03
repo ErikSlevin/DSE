@@ -25,7 +25,8 @@ Eine Sammlung von PowerShell-Tools für das effiziente Exportieren und Importier
 - **Parameter-Support** für automatisierte Ausführung in Cronjobs 
 
 ### Verwendung
-> Powershell auf einer PROD/MGMT-PAW ausführen
+Powershell auf einer PROD/MGMT-PAW ausführen
+
 ``` Powershell 
 # Interaktiver Modus
 .\GPO-Export.ps1
@@ -74,7 +75,7 @@ Eine Sammlung von PowerShell-Tools für das effiziente Exportieren und Importier
 
 ### Verwendung
 
-> Powershell als **T0-Admin** ausführen auf einer PROD/MGMT-PAW
+Powershell als **T0-Admin** ausführen auf einer PROD/MGMT-PAW
 
 ```powershell
 # Komplett interaktiver Modus
