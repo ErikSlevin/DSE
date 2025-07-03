@@ -10,7 +10,8 @@ Eine Sammlung von PowerShell-Tools für das effiziente Exportieren und Importier
 - **[GPO-Import.ps1](#gpo-importps1)**
   - [Verwendung](#verwendung-1)
 
- ## GPO-Export.ps1 - [Link](GPO-Export.ps1)
+ ## GPO-Export.ps1
+> [Link zum Script](GPO-Export.ps1)
 > Stand: 30.06.2025
 
 ### Funktionen
@@ -52,7 +53,8 @@ Powershell auf einer PROD/MGMT-PAW ausführen
 
 --- 
 
-# GPO-Import.ps1 - [LINK](GPO-Import.ps1)
+# GPO-Import.ps1
+> [Link zum Script](GPO-Import.ps1)
 > _Stand: 30.06.2025_
 
 
