@@ -73,8 +73,8 @@ Eine Sammlung von PowerShell-Tools für das effiziente Exportieren und Importier
 
 ### Verwendung
 
-#### Komplett interaktiver Modus
 ```powershell
+# Komplett interaktiver Modus
 .\GPO-Import.ps1
 
 # Import mit Pfad-Vorgabe
