@@ -1,0 +1,9 @@
+0. RemoteNG installieren
+1.Vorlage*.xml (im Zip-File) >> !!! Kopieren !!! >> C:\Users\Administrator\AppData\Roaming\mRemoteNG
+
+## NUR MGMNT DOMÄNE ###
+2. elSpecialUser.ps1 UND elSpecialUser.cmd nach C:\SOURCEN\RemoteNG kopieren
+3. C:\SOURCEN\RemoteNG\elSpecialUser.cmd Rechtsklick -> Senden an -> Desktop
+4. Verknüpfung auf dem Desktop -> Eigenschaften -> (Verknüpfung) Anderes Symbol -> %SystemDrive%\SOURCEN\RemoteNG\mRemoteNG.exe
+
+
