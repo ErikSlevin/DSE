@@ -50,19 +50,6 @@ Die generierte CSV-Datei enthält folgende Spalten:
 | **IPAdresse** | Primäre IPv4-Adresse |
 | **RAM** | Installierter Arbeitsspeicher in GB |
 
-### Funktionsweise
-1. **Active Directory-Abfrage** - Lädt alle Server-Objekte (außer HOST-Systemen)
-2. **Netzwerkadapter-Analyse** - Identifiziert aktive Hyper-V-Netzwerkadapter (`netvsc`)
-3. **Systeminformationen** - Sammelt Computernamen, Domäne und RAM-Größe
-4. **IP-Filterung** - Extrahiert primäre IPv4-Adresse pro Adapter
-5. **CSV-Export** - Strukturierte Ausgabe mit Semikolon-Trennung
-
-### Voraussetzungen
-- **PowerShell 5.1+**
-- **Active Directory-Modul** (`Import-Module ActiveDirectory`)
-- **Domänen-Administrator-Rechte** oder entsprechende Berechtigungen
-- **Netzwerkzugriff** auf alle zu inventarisierenden Server
-
 ### Anwendungsfälle
 - **PROD-Domäne-Inventarisierung** für Dokumentation
 - **PROD-Domäne-Inventarisierung** für Dokumentation
