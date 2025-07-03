@@ -48,6 +48,8 @@ Eine Sammlung von PowerShell-Tools für die effiziente Verwaltung von Hyper-V-Um
 - **Vordefinierte VM-ISO-Mappings** für verschiedene Serverrollen
 - **Flexible Konfiguration** mit anpassbaren Pfaden im Script selber 
 
+---
+
 ### Verwendung
 PowerShell auf einem Hyper-V-Host ausführen
 
