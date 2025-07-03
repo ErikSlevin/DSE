@@ -6,14 +6,9 @@ Eine Sammlung von PowerShell-Tools für das effiziente Exportieren und Importier
 ## Inhaltsverzeichnis
 
 - **[GPO-Export.ps1](#gpo-exportps1)**
-  - [Funktionen](#funktionen)
   - [Verwendung](#verwendung)
-  - [Parameter](#parameter)
-- **[GPO-Import.ps1](#gpo-importps1)**
-  - [Funktionen](#funktionen-1)
+-**[GPO-Import.ps1](#gpo-importps1)**
   - [Verwendung](#verwendung-1)
-  - [Parameter](#parameter-1)
-  - [Ausgabe-Struktur](#ausgabe-struktur)
 
  ## GPO-Export.ps1
 > Stand: 30.06.2025
