@@ -45,7 +45,13 @@ Eine Sammlung von PowerShell-Tools für das effiziente Exportieren und Importier
 # GPO-Import.ps1
 > _Stand: 30.06.2025_
 
+> [!IMPORTANT]  
+> Muss als T0-Administrator ausgeführt werden
+
 ### Funktionen
+- **Import in Domänenfremder GPOs** aus einem Backupverzeichniss 
+  - Prod-Domain `->` MGMT Domain 
+  - Prod-Domain-Übung-1 `->` Prod-Domain-Einsatz-1
 - **Analyse von Backup-Verzeichnissen** mit automatischer Metadaten-Extraktion
 - **Interaktive Auswahl** der zu importierenden GPOs
 - **Mehrfach-Auswahl von GPOs** (z.B. `1-6, 9, 10, 14-22`) für effiziente Massenbearbeitung
