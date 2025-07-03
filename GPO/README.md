@@ -58,7 +58,8 @@ Eine Sammlung von PowerShell-Tools für das effiziente Exportieren und Importier
 # GPO-Import.ps1
 > _Stand: 30.06.2025_
 
-> [!IMPORTANT]  
+
+> [!IMPORTANT] 
 > Muss als <code style="color : red">T0-Administrator</code> ausgeführt werden
 
 ### Funktionen
