@@ -6,9 +6,7 @@ Eine Sammlung von PowerShell-Tools für das effiziente Exportieren und Importier
 ## Inhaltsverzeichnis
 
 - **[GPO-Export.ps1](#gpo-exportps1)**
-  - [Verwendung](#verwendung)
 - **[GPO-Import.ps1](#gpo-importps1)**
-  - [Verwendung](#verwendung-1)
 
  ## GPO-Export.ps1
 > [Link zum Script](GPO-Export.ps1)\
