@@ -66,7 +66,6 @@ Die generierte CSV-Datei enthält folgende Spalten:
 
 ### Beispiel-Ausgabe
 
-```markdown
 | Server | FQDN | MACAdresse | IPAdresse | RAM |
 |--------|------|------------|-----------|-----|
 | VM-PROD-DC-01 | vm-prod-dc-01.domain.local | 00:15:5D:XX:XX:XX | 192.168.1.10 | 8GB |
@@ -83,4 +82,3 @@ Die generierte CSV-Datei enthält folgende Spalten:
 | VM-PROD-WDS-01 | vm-prod-wds-01.domain.local | 00:15:5D:XX:XX:XX | 192.168.1.90 | 8GB |
 | VM-PROD-WEB-01 | vm-prod-web-01.domain.local | 00:15:5D:XX:XX:XX | 192.168.1.100 | 8GB |
 | VM-PROD-AV-01 | vm-prod-av-01.domain.local | 00:15:5D:XX:XX:XX | 192.168.1.110 | 6GB |
-```
