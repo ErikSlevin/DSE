@@ -59,7 +59,7 @@ Eine Sammlung von PowerShell-Tools für das effiziente Exportieren und Importier
 > _Stand: 30.06.2025_
 
 > [!IMPORTANT]  
-> Muss als <code style="color : name_color">T0-Administrator</code> ausgeführt werden
+> Muss als <code style="color : red">T0-Administrator</code> ausgeführt werden
 
 ### Funktionen
 - **Import in Domänenfremder GPOs** aus einem Backupverzeichniss 
