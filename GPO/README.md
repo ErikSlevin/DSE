@@ -14,7 +14,7 @@ Eine Sammlung von PowerShell-Tools für das effiziente Exportieren und Importier
 > Stand: 30.06.2025
 
 ### Funktionen
-- **Export** von GPOs aus der aktuellen Domäne
+- **Export** von GPOs aus der aktuellen Domäne in ein Backup-Verzeichnis
 - **Mehrfach-Auswahl von GPOs** (z.B. `1-6, 9, 10, 14-22`) für effiziente Massenbearbeitung
 - **Strukturierte Backups** mit detailliertem Logging und Metadaten
 - **Parameter-Support** für automatisierte Ausführung in Cronjobs 
