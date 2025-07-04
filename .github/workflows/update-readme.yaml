@@ -29,7 +29,7 @@ jobs:
 
     - name: Generate README Content
       run: |
-        python << 'EOF'
+        cat > generate_readme.py << 'EOF'
         import os
         import re
         from datetime import datetime
@@ -81,39 +81,46 @@ jobs:
                 })
 
         # README-Inhalt generieren
-        readme_content = f"""# DSE - Domain Systems & Enterprise Tools
-
-Eine umfassende Sammlung von PowerShell-Tools für die effiziente Verwaltung von Windows-Domänenumgebungen und Enterprise-Systemen.
-
-> **Letztes Update:** {datetime.now().strftime('%d.%m.%Y')}  
-> **Gesamtanzahl Scripts:** {sum(cat['script_count'] for cat in categories)}  
-> **Kategorien:** {len(categories)}
-
-## 📋 Inhaltsverzeichnis
-
-| Kategorie | Beschreibung | Scripts | Dokumentation |
-|-----------|--------------|---------|---------------|"""
+        total_scripts = sum(cat['script_count'] for cat in categories)
+        update_time = datetime.now().strftime('%d.%m.%Y')
+        update_timestamp = datetime.now().strftime('%d.%m.%Y um %H:%M:%S')
+        
+        readme_lines = [
+            "# DSE - Domain Systems & Enterprise Tools",
+            "",
+            "Eine umfassende Sammlung von PowerShell-Tools für die effiziente Verwaltung von Windows-Domänenumgebungen und Enterprise-Systemen.",
+            "",
+            f"> **Letztes Update:** {update_time}",
+            f"> **Gesamtanzahl Scripts:** {total_scripts}",
+            f"> **Kategorien:** {len(categories)}",
+            "",
+            "## 📋 Inhaltsverzeichnis",
+            "",
+            "| Kategorie | Beschreibung | Scripts | Dokumentation |",
+            "|-----------|--------------|---------|---------------|"
+        ]
 
         for category in categories:
             readme_link = f"[📖]({category['name']}/README.md)" if category['has_readme'] else "❌"
-            readme_content += f"""
-| **[{category['name']}]({category['name']}/)** | {category['description']} | {category['script_count']} | {readme_link} |"""
+            readme_lines.append(f"| **[{category['name']}]({category['name']}/)** | {category['description']} | {category['script_count']} | {readme_link} |")
 
-        readme_content += f"""
-
-## 🚀 Schnellstart
-
-
-## 📂 Kategorien im Detail
-
-"""
+        readme_lines.extend([
+            "",
+            "## 🚀 Schnellstart",
+            "",
+            "",
+            "## 📂 Kategorien im Detail",
+            ""
+        ])
 
         for category in categories:
-            readme_content += f"### {category['name']}\n"
+            readme_lines.append(f"### {category['name']}")
             if category['has_readme']:
-                readme_content += f"**[📖 Zur vollständigen Dokumentation]({category['name']}/README.md)**\n\n"
-            readme_content += f"{category['description']}\n\n"
-            readme_content += f"- **Anzahl Scripts:** {category['script_count']}\n"
+                readme_lines.append(f"**[📖 Zur vollständigen Dokumentation]({category['name']}/README.md)**")
+                readme_lines.append("")
+            readme_lines.append(f"{category['description']}")
+            readme_lines.append("")
+            readme_lines.append(f"- **Anzahl Scripts:** {category['script_count']}")
             
             # Liste der Scripts hinzufügen
             script_files = []
@@ -123,34 +130,37 @@ Eine umfassende Sammlung von PowerShell-Tools für die effiziente Verwaltung von
                         script_files.append(file)
             
             if script_files:
-                readme_content += "- **Verfügbare Scripts:**\n"
+                readme_lines.append("- **Verfügbare Scripts:**")
                 for script in script_files:
-                    readme_content += f"  - `{script}`\n"
+                    readme_lines.append(f"  - `{script}`")
             
-            readme_content += "\n"
+            readme_lines.append("")
 
-        readme_content += f"""## 🔧 Entwicklung & Beitrag
-
-### Repository-Struktur
-```
-DSE/
-├── GPO/                    # Group Policy Object Tools
-├── HYPER-V/               # Hyper-V Management Tools  
-├── WSUS/                  # Windows Update Services Tools
-├── WDS/                   # Windows Deployment Services Tools
-├── SYS/                   # System Administration Tools
-└── [weitere Kategorien]/  # Zusätzliche Tool-Kategorien
-```
-
-> Automatisch generiert am {datetime.now().strftime('%d.%m.%Y um %H:%M:%S')} UTC
-"""
+        readme_lines.extend([
+            "## 🔧 Entwicklung & Beitrag",
+            "",
+            "### Repository-Struktur",
+            "```",
+            "DSE/",
+            "├── GPO/                    # Group Policy Object Tools",
+            "├── HYPER-V/               # Hyper-V Management Tools",
+            "├── WSUS/                  # Windows Update Services Tools",
+            "├── WDS/                   # Windows Deployment Services Tools",
+            "├── SYS/                   # System Administration Tools",
+            "└── [weitere Kategorien]/  # Zusätzliche Tool-Kategorien",
+            "```",
+            "",
+            f"> Automatisch generiert am {update_timestamp} UTC"
+        ])
 
         # README-Datei schreiben
         with open('README.md', 'w', encoding='utf-8') as f:
-            f.write(readme_content)
+            f.write('\n'.join(readme_lines))
 
         print("README.md wurde erfolgreich generiert!")
         EOF
+        
+        python generate_readme.py
 
     - name: Check for changes
       id: verify-changed-files
