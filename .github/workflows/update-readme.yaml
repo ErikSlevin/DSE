@@ -1,0 +1,177 @@
+# .github/workflows/update-readme.yml
+name: Update README with Table of Contents
+
+on:
+  push:
+    branches: [ main, master ]
+    paths:
+      - '*/README.md'
+      - '**/*.ps1'
+  pull_request:
+    branches: [ main, master ]
+  workflow_dispatch: # Manueller Trigger
+
+jobs:
+  update-readme:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v4
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+        fetch-depth: 0
+
+    - name: Setup Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.9'
+
+    - name: Generate README Content
+      run: |
+        python << 'EOF'
+        import os
+        import re
+        from datetime import datetime
+
+        def count_ps1_files(directory):
+            """Zählt PowerShell-Dateien in einem Verzeichnis"""
+            count = 0
+            if os.path.exists(directory):
+                for file in os.listdir(directory):
+                    if file.endswith('.ps1'):
+                        count += 1
+            return count
+
+        def extract_description_from_readme(readme_path):
+            """Extrahiert die erste Beschreibung aus einer README"""
+            if not os.path.exists(readme_path):
+                return "Keine Beschreibung verfügbar"
+            
+            try:
+                with open(readme_path, 'r', encoding='utf-8') as f:
+                    content = f.read()
+                    
+                # Suche nach der ersten Beschreibung nach dem Titel
+                lines = content.split('\n')
+                for i, line in enumerate(lines):
+                    if line.strip() and not line.startswith('#') and not line.startswith('>'): 
+                        if len(line.strip()) > 20:  # Mindestlänge für Beschreibung
+                            return line.strip()
+                
+                return "PowerShell-Tools für Systemverwaltung"
+            except:
+                return "Keine Beschreibung verfügbar"
+
+        # Repository-Struktur scannen
+        categories = []
+        base_dirs = [d for d in os.listdir('.') if os.path.isdir(d) and not d.startswith('.') and d not in ['node_modules']]
+        
+        for directory in sorted(base_dirs):
+            readme_path = os.path.join(directory, 'README.md')
+            script_count = count_ps1_files(directory)
+            
+            if script_count > 0 or os.path.exists(readme_path):
+                description = extract_description_from_readme(readme_path)
+                categories.append({
+                    'name': directory,
+                    'description': description,
+                    'script_count': script_count,
+                    'has_readme': os.path.exists(readme_path)
+                })
+
+        # README-Inhalt generieren
+        readme_content = f"""# DSE - Domain Systems & Enterprise Tools
+
+Eine umfassende Sammlung von PowerShell-Tools für die effiziente Verwaltung von Windows-Domänenumgebungen und Enterprise-Systemen.
+
+> **Letztes Update:** {datetime.now().strftime('%d.%m.%Y')}  
+> **Gesamtanzahl Scripts:** {sum(cat['script_count'] for cat in categories)}  
+> **Kategorien:** {len(categories)}
+
+## 📋 Inhaltsverzeichnis
+
+| Kategorie | Beschreibung | Scripts | Dokumentation |
+|-----------|--------------|---------|---------------|"""
+
+        for category in categories:
+            readme_link = f"[📖]({category['name']}/README.md)" if category['has_readme'] else "❌"
+            readme_content += f"""
+| **[{category['name']}]({category['name']}/)** | {category['description']} | {category['script_count']} | {readme_link} |"""
+
+        readme_content += f"""
+
+## 🚀 Schnellstart
+
+
+## 📂 Kategorien im Detail
+
+"""
+
+        for category in categories:
+            readme_content += f"### {category['name']}\n"
+            if category['has_readme']:
+                readme_content += f"**[📖 Zur vollständigen Dokumentation]({category['name']}/README.md)**\n\n"
+            readme_content += f"{category['description']}\n\n"
+            readme_content += f"- **Anzahl Scripts:** {category['script_count']}\n"
+            
+            # Liste der Scripts hinzufügen
+            script_files = []
+            if os.path.exists(category['name']):
+                for file in sorted(os.listdir(category['name'])):
+                    if file.endswith('.ps1'):
+                        script_files.append(file)
+            
+            if script_files:
+                readme_content += "- **Verfügbare Scripts:**\n"
+                for script in script_files:
+                    readme_content += f"  - `{script}`\n"
+            
+            readme_content += "\n"
+
+        readme_content += f"""## 🔧 Entwicklung & Beitrag
+
+### Repository-Struktur
+```
+DSE/
+├── GPO/                    # Group Policy Object Tools
+├── HYPER-V/               # Hyper-V Management Tools  
+├── WSUS/                  # Windows Update Services Tools
+├── WDS/                   # Windows Deployment Services Tools
+├── SYS/                   # System Administration Tools
+└── [weitere Kategorien]/  # Zusätzliche Tool-Kategorien
+```
+
+> Automatisch generiert am {datetime.now().strftime('%d.%m.%Y um %H:%M:%S')} UTC
+"""
+
+        # README-Datei schreiben
+        with open('README.md', 'w', encoding='utf-8') as f:
+            f.write(readme_content)
+
+        print("README.md wurde erfolgreich generiert!")
+        EOF
+
+    - name: Check for changes
+      id: verify-changed-files
+      run: |
+        if git diff --quiet; then
+          echo "changed=false" >> $GITHUB_OUTPUT
+        else
+          echo "changed=true" >> $GITHUB_OUTPUT
+        fi
+
+    - name: Commit changes
+      if: steps.verify-changed-files.outputs.changed == 'true'
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git add README.md
+        git commit -m "🤖 Auto-update README.md mit aktuellem Inhaltsverzeichnis"
+
+    - name: Push changes
+      if: steps.verify-changed-files.outputs.changed == 'true'
+      uses: ad-m/github-push-action@master
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        branch: ${{ github.ref }}
