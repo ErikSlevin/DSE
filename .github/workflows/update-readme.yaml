@@ -11,6 +11,10 @@ on:
     branches: [ main, master ]
   workflow_dispatch: # Manueller Trigger
 
+permissions:
+  contents: write  # Berechtigung zum Schreiben von Inhalten
+  pull-requests: write  # Berechtigung für Pull Requests
+
 jobs:
   update-readme:
     runs-on: ubuntu-latest
@@ -162,26 +166,14 @@ jobs:
         
         python generate_readme.py
 
-    - name: Check for changes
-      id: verify-changed-files
-      run: |
-        if git diff --quiet; then
-          echo "changed=false" >> $GITHUB_OUTPUT
-        else
-          echo "changed=true" >> $GITHUB_OUTPUT
-        fi
-
-    - name: Commit changes
-      if: steps.verify-changed-files.outputs.changed == 'true'
-      run: |
-        git config --local user.email "action@github.com"
-        git config --local user.name "GitHub Action"
-        git add README.md
-        git commit -m "🤖 Auto-update README.md mit aktuellem Inhaltsverzeichnis"
-
-    - name: Push changes
-      if: steps.verify-changed-files.outputs.changed == 'true'
-      uses: ad-m/github-push-action@master
+    - name: Auto-commit README changes
+      uses: stefanzweifel/git-auto-commit-action@v5
       with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        branch: ${{ github.ref }}
+        commit_message: '🤖 Auto-update README.md mit aktuellem Inhaltsverzeichnis'
+        file_pattern: 'README.md'
+        commit_user_name: 'github-actions[bot]'
+        commit_user_email: '41898282+github-actions[bot]@users.noreply.github.com'
+        commit_author: 'github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>'
+        skip_dirty_check: false
+        skip_fetch: false
+        skip_checkout: false
