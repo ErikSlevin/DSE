@@ -1,11 +1,10 @@
-
 {
   "metadata": {
-    "version": "1.0.1",
-    "lastUpdated": "2025-06-27",
-    "description": "Vereinfachte WSUS-Update-Konfiguration für PowerShell",
+    "version": "1.1.0",
+    "lastUpdated": "2025-07-03",
+    "description": "Erweiterte WSUS-Update-Konfiguration für PowerShell",
     "author": "Erik Slevin",
-    "documentation": "Optimiert für PowerShell ConvertFrom-Json"
+    "documentation": "Optimiert für PowerShell ConvertFrom-Json - Erweitert um zusätzliche Legacy-Produkte"
   },
   "declined_updates": [
     {
@@ -79,6 +78,17 @@
         "Windows 10 S, Vibranium and later, Upgrade & Servicing Drivers",
         "Windows - Client S, version 21H2 and later, Servicing Drivers",
         "Windows - Client S, version 21H2 and later, Upgrade & Servicing Drivers"
+      ]
+    },
+    {
+      "category": "windows_ultimate_extras",
+      "name": "Windows Ultimate Extras",
+      "description": "Windows Vista Ultimate Extras und spezielle Editionen",
+      "priority": "medium",
+      "reason": "Windows Vista Ultimate End-of-Life, spezielle Extras nicht mehr relevant",
+      "products": [
+        "Windows Ultimate Extras",
+        "OOBE ZDP"
       ]
     },
     {
@@ -222,6 +232,18 @@
       "reason": "Feature Packs werden nicht separat benötigt",
       "products": [
         "SQL Server Feature Pack"
+      ]
+    },
+    {
+      "category": "sql_server_report_viewer",
+      "name": "SQL Server Report Viewer (Legacy)",
+      "description": "Veraltete SQL Server Report Viewer-Versionen",
+      "priority": "medium",
+      "reason": "Sehr alte Report Viewer-Versionen, durch neuere Technologien ersetzt",
+      "products": [
+        "Report Viewer 2005",
+        "Report Viewer 2008",
+        "Report Viewer 2010"
       ]
     },
     {
@@ -477,7 +499,7 @@
       "category": "security_tools_legacy",
       "name": "Sicherheitstools (Legacy)",
       "description": "Veraltete Microsoft Sicherheits- und Management-Tools",
-      "priority": "medium",
+      "priority": "high",
       "reason": "Durch Windows Defender und moderne Sicherheitstools ersetzt",
       "products": [
         "Forefront Client Security",
@@ -488,7 +510,276 @@
         "Forefront Protection Category",
         "Forefront Server Security Category",
         "Forefront Threat Management Gateway, Definition Updates for HTTP Malware Inspection",
-        "Forefront TMG"
+        "Forefront TMG",
+        "MS Security Essentials",
+        "Security Essentials",
+        "System Center Endpoint Protection",
+        "Microsoft BitLocker Administration and Monitoring v1"
+      ]
+    },
+    {
+      "category": "isa_server_tmg",
+      "name": "ISA Server & TMG (Legacy)",
+      "description": "Internet Security and Acceleration Server und Threat Management Gateway",
+      "priority": "high",
+      "reason": "End-of-Life erreicht, keine Updates mehr verfügbar, Sicherheitsrisiko",
+      "products": [
+        "Firewall Client for ISA Server",
+        "Internet Security and Acceleration Server 2004",
+        "Internet Security and Acceleration Server 2006",
+        "Threat Management Gateway Definition Updates for Network Inspection System",
+        "TMG Firewall Client"
+      ]
+    },
+    {
+      "category": "legacy_microsoft_tools",
+      "name": "Legacy Microsoft Tools",
+      "description": "Veraltete Microsoft-Tools die End-of-Life erreicht haben",
+      "priority": "high",
+      "reason": "End-of-Life erreicht, keine Updates mehr verfügbar",
+      "products": [
+        "Active Directory Rights Management Services Client 2.0",
+        "CAPICOM",
+        "Compute Cluster Pack",
+        "Microsoft Works 8",
+        "Microsoft Works 9",
+        "Works 6-9 Converter"
+      ]
+    },
+    {
+      "category": "windows_live_suite",
+      "name": "Windows Live Suite",
+      "description": "Windows Live-Anwendungen und -Dienste",
+      "priority": "medium",
+      "reason": "Windows Live eingestellt, durch moderne Alternativen ersetzt",
+      "products": [
+        "Windows Live",
+        "Windows Live Toolbar",
+        "Photo Gallery Installation and Upgrades",
+        "Writer Installation and Upgrades"
+      ]
+    },
+    {
+      "category": "health_online_services",
+      "name": "Health & Online Services (Legacy)",
+      "description": "Veraltete Health- und Online-Services",
+      "priority": "medium",
+      "reason": "Services eingestellt oder durch moderne Alternativen ersetzt",
+      "products": [
+        "HealthVault Connection Center",
+        "HealthVault Connection Center Upgrades",
+        "Microsoft Online Services Sign-In Assistant",
+        "OneCare Family Safety Installation"
+      ]
+    },
+    {
+      "category": "expression_suite",
+      "name": "Expression Suite (Legacy)",
+      "description": "Microsoft Expression Design und Web-Tools",
+      "priority": "medium",
+      "reason": "Expression Suite eingestellt 2012, durch moderne Webentwicklungstools ersetzt",
+      "products": [
+        "Expression Design 1",
+        "Expression Design 2",
+        "Expression Design 3",
+        "Expression Design 4",
+        "Expression Web 4"
+      ]
+    },
+    {
+      "category": "virtualization_legacy",
+      "name": "Virtualisierung (Legacy)",
+      "description": "Veraltete Virtualisierungslösungen",
+      "priority": "medium",
+      "reason": "Virtual PC/Server durch Hyper-V ersetzt, End-of-Life erreicht",
+      "products": [
+        "Virtual PC",
+        "Virtual Server"
+      ]
+    },
+    {
+      "category": "dynamics_crm",
+      "name": "Microsoft Dynamics CRM",
+      "description": "Microsoft Dynamics CRM-Versionen",
+      "priority": "medium",
+      "reason": "Dynamics CRM wird nicht in der Umgebung eingesetzt",
+      "products": [
+        "Microsoft Dynamics CRM 2011",
+        "Microsoft Dynamics CRM 2011 SHS",
+        "Microsoft Dynamics CRM 2013",
+        "Microsoft Dynamics CRM 2015",
+        "Microsoft Dynamics CRM 2016",
+        "Microsoft Dynamics CRM 2016 SHS"
+      ]
+    },
+    {
+      "category": "azure_components",
+      "name": "Azure-Komponenten",
+      "description": "Azure-spezifische Komponenten und Services",
+      "priority": "medium",
+      "reason": "Azure-Komponenten werden nicht in der lokalen Umgebung eingesetzt",
+      "products": [
+        "AksEdge Category",
+        "Azure Connected Machine Agent 3",
+        "Azure File Sync agent updates for Windows Server 2016",
+        "Azure File Sync agent updates for Windows Server 2019",
+        "Azure IoT Edge for Linux on Windows Category",
+        "Azure Stack HCI",
+        "Microsoft Azure Edge Appliance"
+      ]
+    },
+    {
+      "category": "azure_pack",
+      "name": "Windows Azure Pack",
+      "description": "Windows Azure Pack-Komponenten",
+      "priority": "medium",
+      "reason": "Azure Pack wird nicht verwendet, Cloud-Services werden direkt über Azure verwaltet",
+      "products": [
+        "Windows Azure Pack: Admin API",
+        "Windows Azure Pack: Admin Authentication Site",
+        "Windows Azure Pack: Admin Site",
+        "Windows Azure Pack: Configuration Site",
+        "Windows Azure Pack: Microsoft Best Practice Analyzer",
+        "Windows Azure Pack: Monitoring Extension",
+        "Windows Azure Pack: MySQL Extension",
+        "Windows Azure Pack: PowerShell API",
+        "Windows Azure Pack: SQL Server Extension",
+        "Windows Azure Pack: Tenant API",
+        "Windows Azure Pack: Tenant Authentication Site",
+        "Windows Azure Pack: Tenant Public API",
+        "Windows Azure Pack: Tenant Site",
+        "Windows Azure Pack: Usage Extension",
+        "Windows Azure Pack: Web App Gallery Extension",
+        "Windows Azure Pack: Web Sites"
+      ]
+    },
+    {
+      "category": "dynamic_updates",
+      "name": "Dynamic Updates",
+      "description": "Windows Dynamic Update-Kategorien",
+      "priority": "high",
+      "reason": "Dynamic Updates werden automatisch während Windows-Upgrades heruntergeladen und können über WSUS zu Problemen führen",
+      "products": [
+        "Windows 10 and later Dynamic Update",
+        "Windows 10 and later GDR-DU",
+        "Windows 10 GDR-DU FOD",
+        "Windows 10 GDR-DU LP",
+        "Windows 11 Dynamic Update",
+        "Windows 11 Dynamic Update / GDR-DU",
+        "Windows GDR-Dynamic Update"
+      ]
+    },
+    {
+      "category": "purview_client",
+      "name": "Microsoft Purview Client",
+      "description": "Microsoft Purview Client Service",
+      "priority": "medium",
+      "reason": "Purview Client wird nicht in der Umgebung eingesetzt",
+      "products": [
+        "Microsoft Purview Client Service"
+      ]
+    },
+    {
+      "category": "features_on_demand_all",
+      "name": "Features on Demand (Alle Versionen)",
+      "description": "Features on Demand können nicht über WSUS verwaltet werden",
+      "priority": "high",
+      "reason": "Ab Windows 10 1809 nur noch über Windows Update verfügbar, nicht über WSUS - funktioniert nicht!",
+      "products": [
+        "Windows 10 Feature On Demand",
+        "Windows 10 Features On Demand",
+        "Windows 10 FOD",
+        "Windows 11 Feature On Demand",
+        "Windows 11 Features On Demand",
+        "Windows 11 FOD",
+        "Features On Demand",
+        "FOD"
+      ]
+    },
+    {
+      "category": "server_features_on_demand",
+      "name": "Windows Server Features on Demand",
+      "description": "Server Features on Demand können nicht über WSUS verwaltet werden",
+      "priority": "high",
+      "reason": "Server FOD nur noch über Windows Update verfügbar, nicht über WSUS",
+      "products": [
+        "Windows Server Feature On Demand",
+        "Windows Server Features On Demand",
+        "Windows Server FOD",
+        "Server Features On Demand"
+      ]
+    },
+    {
+      "category": "language_features_on_demand",
+      "name": "Language Features on Demand",
+      "description": "Sprachbezogene Features on Demand",
+      "priority": "high",
+      "reason": "Language FOD nur noch über Windows Update verfügbar",
+      "products": [
+        "Language Features On Demand",
+        "Language FOD",
+        "Windows 10 Language Features",
+        "Windows 11 Language Features"
+      ]
+    },
+    {
+      "category": "server_azure_editions",
+      "name": "Windows Server Azure Editions",
+      "description": "Spezielle Azure-Editionen von Windows Server",
+      "priority": "medium",
+      "reason": "Azure-spezifische Server-Editionen werden nicht verwendet",
+      "products": [
+        "Windows Server 2019 Datacenter: Azure Edition Hotpatch"
+      ]
+    },
+    {
+      "category": "legacy_monitoring_tools",
+      "name": "Legacy Monitoring Tools",
+      "description": "Veraltete Monitoring- und Netzwerk-Tools",
+      "priority": "medium",
+      "reason": "Veraltete Tools aus 2010, durch moderne Alternativen ersetzt",
+      "products": [
+        "Network Monitor 3"
+      ]
+    },
+    {
+      "category": "legacy_service_bus",
+      "name": "Legacy Service Bus",
+      "description": "Veraltete Service Bus-Implementierung",
+      "priority": "medium",
+      "reason": "Service Bus for Windows Server 1.1 veraltet, durch Azure Service Bus ersetzt",
+      "products": [
+        "Service Bus for Windows Server 1.1"
+      ]
+    },
+    {
+      "category": "ime_dictionary_updates",
+      "name": "IME Dictionary Updates",
+      "description": "Wörterbuch-Updates für Input Method Editors",
+      "priority": "low",
+      "reason": "IME-Wörterbücher nur für asiatische Sprachen benötigt, nicht in der Umgebung verwendet",
+      "products": [
+        "Dictionary Updates for Microsoft IMEs"
+      ]
+    },
+    {
+      "category": "azure_information_protection",
+      "name": "Azure Information Protection",
+      "description": "Azure Information Protection Unified Labeling Client",
+      "priority": "medium",
+      "reason": "Azure Information Protection wird nicht in der Umgebung eingesetzt",
+      "products": [
+        "Microsoft Azure Information Protection Unified Labeling Client"
+      ]
+    },
+    {
+      "category": "aspnet_web_frameworks",
+      "name": "ASP.NET Web Frameworks",
+      "description": "ASP.NET Web Frameworks für Webentwicklung",
+      "priority": "low",
+      "reason": "Keine Webentwicklung in der Umgebung, ASP.NET-Frameworks nicht benötigt",
+      "products": [
+        "ASP.NET Web Frameworks"
       ]
     }
   ],
@@ -608,6 +899,95 @@
       "products": [
         "PowerShell 5.1",
         "PowerShell 5.0"
+      ]
+    },
+    {
+      "category": "dotnet_current",
+      "name": ".NET 6.0 bis 9.0",
+      "description": "Aktuelle .NET-Versionen",
+      "priority": "medium",
+      "reason": "Aktuelle .NET-Versionen werden verwendet - Updates erwünscht",
+      "products": [
+        ".NET 6.0",
+        ".NET 7.0",
+        ".NET 8.0",
+        ".NET 9.0"
+      ]
+    },
+    {
+      "category": "microsoft_edge",
+      "name": "Microsoft Edge",
+      "description": "Microsoft Edge Browser (Chromium-basiert)",
+      "priority": "medium",
+      "reason": "Microsoft Edge wird als Standard-Browser verwendet - Updates erwünscht",
+      "products": [
+        "Microsoft Edge"
+      ]
+    },
+    {
+      "category": "windows_defender",
+      "name": "Windows Defender/Microsoft Defender",
+      "description": "Windows Defender und Microsoft Defender for Endpoint",
+      "priority": "high",
+      "reason": "Microsoft Defender wird für Endpoint-Sicherheit verwendet - Updates kritisch",
+      "products": [
+        "Microsoft Defender Antivirus",
+        "Microsoft Defender for Endpoint"
+      ]
+    },
+    {
+      "category": "windows_security",
+      "name": "Windows Security Platform",
+      "description": "Windows Security Platform und verwandte Sicherheitskomponenten",
+      "priority": "high",
+      "reason": "Windows Security Platform ist essentiell für Systemsicherheit - Updates kritisch",
+      "products": [
+        "Windows Security platform"
+      ]
+    },
+    {
+      "category": "visual_studio_current",
+      "name": "Visual Studio - Aktuelle Versionen",
+      "description": "Visual Studio 2017, 2019, 2022 - falls Entwicklung betrieben wird",
+      "priority": "low",
+      "reason": "Visual Studio wird GGF für Entwicklungsarbeiten verwendet - Updates erwünscht",
+      "products": [
+        "Visual Studio 2017",
+        "Visual Studio 2019",
+        "Visual Studio 2022"
+      ]
+    },
+    {
+      "category": "powershell_current",
+      "name": "PowerShell - Aktuelle Version",
+      "description": "PowerShell x64 (aktuelle Version)",
+      "priority": "medium",
+      "reason": "PowerShell x64 wird verwendet - Updates erwünscht",
+      "products": [
+        "PowerShell - x64"
+      ]
+    },
+    {
+      "category": "windows_admin_center",
+      "name": "Windows Admin Center",
+      "description": "Windows Admin Center für Server-Verwaltung",
+      "priority": "low",
+      "reason": "Windows Admin Center wird GGF für Server-Verwaltung verwendet - Updates erwünscht",
+      "products": [
+        "Windows Admin Center"
+      ]
+    },
+    {
+      "category": "sql_server_odbc_drivers",
+      "name": "SQL Server ODBC/OLE DB Drivers",
+      "description": "Microsoft SQL Server ODBC und OLE DB Drivers",
+      "priority": "medium",
+      "reason": "SQL Server Drivers werden für Datenbankverbindungen verwendet - Updates erwünscht",
+      "products": [
+        "Microsoft ODBC Driver 17 for SQL Server",
+        "Microsoft ODBC Driver 18 for SQL Server",
+        "Microsoft OLE DB Driver 18 for SQL Server",
+        "Microsoft OLE DB Driver 19 for SQL Server"
       ]
     }
   ]
