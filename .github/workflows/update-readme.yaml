@@ -50,7 +50,7 @@ jobs:
         def extract_description_from_readme(readme_path):
             """Extrahiert die erste Beschreibung aus einer README"""
             if not os.path.exists(readme_path):
-                return "Keine Beschreibung verfügbar"
+                return ""
             
             try:
                 with open(readme_path, 'r', encoding='utf-8') as f:
@@ -63,38 +63,9 @@ jobs:
                         if len(line.strip()) > 20:  # Mindestlänge für Beschreibung
                             return line.strip()
                 
-                return "PowerShell-Tools für Systemverwaltung"
+                return ""
             except:
-                return "Keine Beschreibung verfügbar"
-
-        def get_category_description(category_name):
-            """Erstellt eine Beschreibung basierend auf dem Kategorienamen"""
-            descriptions = {
-                'GPO': 'Group Policy Object Tools',
-                'HYPER-V': 'Hyper-V Management Tools',
-                'WSUS': 'Windows Update Services Tools',
-                'WDS': 'Windows Deployment Services Tools',
-                'SYS': 'System Administration Tools'
-            }
-            return descriptions.get(category_name, f'{category_name} Tools')
-
-        def generate_directory_structure(categories):
-            """Generiert die Verzeichnisstruktur basierend auf gefundenen Kategorien"""
-            structure_lines = ["DSE"]
-            
-            for i, category in enumerate(categories):
-                category_name = category['name']
-                description = get_category_description(category_name)
-                
-                # Verwende verschiedene Tree-Zeichen
-                if i == len(categories) - 1:
-                    prefix = "└── "
-                else:
-                    prefix = "├── "
-                
-                structure_lines.append(f"{prefix}{category_name}{'':20} ")
-            
-            return structure_lines
+                return ""
 
         # Repository-Struktur scannen
         categories = []
@@ -119,29 +90,23 @@ jobs:
         update_timestamp = datetime.now().strftime('%d.%m.%Y um %H:%M:%S')
         
         readme_lines = [
-            "Eine umfassende Sammlung von PowerShell-Tools für die effiziente Verwaltung von Windows-Domänenumgebungen und Enterprise-Systemen.",
+            "# DSE Scriptvault",
             "",
-            f"> **Letztes Update:** {update_time}",
-            f"> **Gesamtanzahl Scripts:** {total_scripts}",
-            f"> **Kategorien:** {len(categories)}",
-            "",
-            "## Inhaltsverzeichnis",
-            "",
-            "| Kategorie | Scripts | Dokumentation |",
-            "|-----------|---------|---------------|"
+            "> [!IMPORTANT]",
+            f"> _Letztes Update: {update_time}_\\",
+            f"> _Gesamtanzahl Scripts: {total_scripts}_ \\",
+            f"> _Kategorien: {len(categories)}_",
+            ""
         ]
 
         for category in categories:
-            readme_link = f"[README]({category['name']}/README.md)" if category['has_readme'] else "Keine"
-            readme_lines.append(f"| **[{category['name']}]({category['name']}/)** | {category['script_count']} | {readme_link} |")
-
-        for category in categories:
-            readme_lines.append(f"### {category['name']}")
-            if category['has_readme']:
-                readme_lines.append(f"**[Zur vollständigen Dokumentation]({category['name']}/README.md)**")
-                readme_lines.append("")
-            readme_lines.append(f"{category['description']}")
+            readme_lines.append(f"### [{category['name']}]({category['name']}/)")
             readme_lines.append("")
+            
+            if category['description']:
+                readme_lines.append(f"{category['description']}")
+                readme_lines.append("")
+            
             readme_lines.append(f"- **Anzahl Scripts:** {category['script_count']}")
             
             # Liste der Scripts hinzufügen
@@ -158,22 +123,7 @@ jobs:
             
             readme_lines.append("")
 
-        # Dynamische Repository-Struktur generieren
-        structure_lines = generate_directory_structure(categories)
-        
-        readme_lines.extend([
-            "## Entwicklung & Beitrag",
-            "",
-            "### Repository-Struktur",
-            "```"
-        ])
-        
-        readme_lines.extend(structure_lines)
-        
-        readme_lines.extend([
-            "```",
-            f"> Automatisch generiert am {update_timestamp} UTC"
-        ])
+        readme_lines.append(f"> _README.md Automatisch generiert am {update_timestamp} UTC_")
 
         # README-Datei schreiben
         with open('README.md', 'w', encoding='utf-8') as f:
