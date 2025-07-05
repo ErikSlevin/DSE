@@ -80,7 +80,7 @@ jobs:
 
         def generate_directory_structure(categories):
             """Generiert die Verzeichnisstruktur basierend auf gefundenen Kategorien"""
-            structure_lines = ["DSE/"]
+            structure_lines = ["DSE"]
             
             for i, category in enumerate(categories):
                 category_name = category['name']
@@ -92,7 +92,7 @@ jobs:
                 else:
                     prefix = "├── "
                 
-                structure_lines.append(f"{prefix}{category_name}/{'':20} # {description}")
+                structure_lines.append(f"{prefix}{category_name}{'':20} ")
             
             return structure_lines
 
@@ -119,8 +119,6 @@ jobs:
         update_timestamp = datetime.now().strftime('%d.%m.%Y um %H:%M:%S')
         
         readme_lines = [
-            "# DSE - Domain Systems & Enterprise Tools",
-            "",
             "Eine umfassende Sammlung von PowerShell-Tools für die effiziente Verwaltung von Windows-Domänenumgebungen und Enterprise-Systemen.",
             "",
             f"> **Letztes Update:** {update_time}",
@@ -129,32 +127,13 @@ jobs:
             "",
             "## Inhaltsverzeichnis",
             "",
-            "| Kategorie | Beschreibung | Scripts | Dokumentation |",
-            "|-----------|--------------|---------|---------------|"
+            "| Kategorie | Scripts | Dokumentation |",
+            "|-----------|---------|---------------|"
         ]
 
         for category in categories:
             readme_link = f"[README]({category['name']}/README.md)" if category['has_readme'] else "Keine"
-            readme_lines.append(f"| **[{category['name']}]({category['name']}/)** | {category['description']} | {category['script_count']} | {readme_link} |")
-
-        readme_lines.extend([
-            "",
-            "## Schnellstart",
-            "",
-            "### Voraussetzungen",
-            "- PowerShell 5.1 oder höher",
-            "- Entsprechende Administratorrechte je nach Tool",
-            "- Windows-Domänenumgebung (für die meisten Tools)",
-            "",
-            "### Verwendung",
-            "1. Repository klonen oder einzelne Scripts herunterladen",
-            "2. PowerShell als Administrator öffnen",
-            "3. Zum gewünschten Verzeichnis navigieren",
-            "4. Script mit entsprechenden Parametern ausführen",
-            "",
-            "## Kategorien im Detail",
-            ""
-        ])
+            readme_lines.append(f"| **[{category['name']}]({category['name']}/)** | {category['script_count']} | {readme_link} |")
 
         for category in categories:
             readme_lines.append(f"### {category['name']}")
@@ -193,20 +172,6 @@ jobs:
         
         readme_lines.extend([
             "```",
-            "",
-            "### Beitrag leisten",
-            "1. Fork des Repositories erstellen",
-            "2. Feature-Branch erstellen (`git checkout -b feature/neue-funktion`)",
-            "3. Änderungen committen (`git commit -am 'Neue Funktion hinzufügen'`)",
-            "4. Branch pushen (`git push origin feature/neue-funktion`)",
-            "5. Pull Request erstellen",
-            "",
-            "### Coding-Standards",
-            "- PowerShell-Scripts sollten `#Requires` Statements enthalten",
-            "- Umfassende Kommentierung und Help-Dokumentation",
-            "- Fehlerbehandlung implementieren",
-            "- Parameter-Validierung verwenden",
-            "",
             f"> Automatisch generiert am {update_timestamp} UTC"
         ])
 
