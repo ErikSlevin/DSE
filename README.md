@@ -46,4 +46,4 @@ Eine Sammlung von PowerShell-Tools für die effiziente Verwaltung von Windows De
 - **Verfügbare Scripts:**
   - `install-ESD-Converter.ps1`
 
-> _README.md Automatisch generiert am 05.07.2025 um 00:22:59 UTC_
+> _README.md Automatisch generiert am 05.07.2025 um 00:26:58 UTC_
