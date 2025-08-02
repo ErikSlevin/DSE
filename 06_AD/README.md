@@ -21,12 +21,13 @@ Eine Sammlung von PowerShell-Tools für die effiziente Verwaltung von Active Dir
 
 ### Verwendung
 
+> [!IMPORTANT]  
+> Muss als **T0-Administrator** ausgeführt werden
 
-# =============================================================================
-# SCHRITT 1: Profil-Setup (einmalig ausführen)
-# =============================================================================
+#### Option 1: PowerShell-Profil Setup (Empfohlen)
 
-# Prüfen ob PowerShell-Profil existiert
+```powershell
+# 1. Profil-Setup (einmalig ausführen)
 if (!(Test-Path $PROFILE)) {
     Write-Host "Erstelle PowerShell-Profil..." -ForegroundColor Green
     New-Item -Path $PROFILE -Type File -Force
@@ -35,29 +36,19 @@ if (!(Test-Path $PROFILE)) {
     Write-Host "Profil existiert bereits: $PROFILE" -ForegroundColor Yellow
 }
 
-# Profil zum Bearbeiten öffnen
-Write-Host "Öffne Profil zum Bearbeiten..." -ForegroundColor Green
+# 2. Profil bearbeiten
 notepad $PROFILE
 
-Write-Host @"
+# 3. Den kompletten Funktionscode aus laps-auslesen.ps1 in das Profil kopieren
+# 4. Profil speichern und schließen
+# 5. Profil neu laden
+. $PROFILE
 
-=============================================================================
-NÄCHSTE SCHRITTE:
-=============================================================================
+# 6. Funktion aufrufen
+laps
+```
 
-1. Kopieren Sie den kompletten Funktionscode (siehe unten) in das geöffnete Notepad
-2. Speichern Sie die Datei (Strg+S)
-3. Schließen Sie Notepad
-4. Laden Sie das Profil neu: . `$PROFILE
-5. Testen Sie den Aufruf: laps
-
-WICHTIG: Kopieren Sie ALLES außer der letzten Zeile "Invoke-LapsPasswordSelection"
-
-=============================================================================
-"@ -ForegroundColor Cyan
-
-> [!IMPORTANT]  
-> Muss als T0-Administrator ausgeführt werden
+#### Option 2: Direktes Laden
 
 ```powershell
 # Script laden und Funktion aufrufen
@@ -86,7 +77,7 @@ laps
 |--------|----------|-------------------|
 | PAW01, PAW02, etc. | Privileged Access Workstation | LA_PAW_MGMNT |
 
-## Ausgabe-Beispiel
+### Ausgabe-Beispiel
 
 ```
 Nr Name            LocalAdmin    Funktion
@@ -110,7 +101,18 @@ Nach der Auswahl:
 - **Leserechte** auf LAPS-Passwörter in Active Directory
 - **Domain-Mitgliedschaft** des ausführenden Systems
 
+### Profil-Setup Vorteile
+
+> [!TIP]
+> Das Hinzufügen der Funktion zum PowerShell-Profil ermöglicht:
+> - **Globale Verfügbarkeit** in jeder PowerShell-Session
+> - **Einfacher Aufruf** mit nur `laps`
+> - **Keine Pfad-Abhängigkeiten** mehr erforderlich
+
 ### Sicherheitshinweise
 
 > [!CAUTION]
 > Das Script zeigt LAPS-Passwörter im Klartext an. Verwenden Sie es nur in sicheren Umgebungen und stellen Sie sicher, dass der Bildschirm nicht einsehbar ist.
+
+> [!NOTE]
+> Die Tier-Zuweisung basiert auf einem spezifischen Schema. Bei abweichenden Namenskonventionen muss das Script entsprechend angepasst werden.
