@@ -21,8 +21,43 @@ Eine Sammlung von PowerShell-Tools für die effiziente Verwaltung von Active Dir
 
 ### Verwendung
 
+
+# =============================================================================
+# SCHRITT 1: Profil-Setup (einmalig ausführen)
+# =============================================================================
+
+# Prüfen ob PowerShell-Profil existiert
+if (!(Test-Path $PROFILE)) {
+    Write-Host "Erstelle PowerShell-Profil..." -ForegroundColor Green
+    New-Item -Path $PROFILE -Type File -Force
+    Write-Host "Profil erstellt: $PROFILE" -ForegroundColor Green
+} else {
+    Write-Host "Profil existiert bereits: $PROFILE" -ForegroundColor Yellow
+}
+
+# Profil zum Bearbeiten öffnen
+Write-Host "Öffne Profil zum Bearbeiten..." -ForegroundColor Green
+notepad $PROFILE
+
+Write-Host @"
+
+=============================================================================
+NÄCHSTE SCHRITTE:
+=============================================================================
+
+1. Kopieren Sie den kompletten Funktionscode (siehe unten) in das geöffnete Notepad
+2. Speichern Sie die Datei (Strg+S)
+3. Schließen Sie Notepad
+4. Laden Sie das Profil neu: . `$PROFILE
+5. Testen Sie den Aufruf: laps
+
+WICHTIG: Kopieren Sie ALLES außer der letzten Zeile "Invoke-LapsPasswordSelection"
+
+=============================================================================
+"@ -ForegroundColor Cyan
+
 > [!IMPORTANT]  
-> Muss als Benutzer mit LAPS-Leserechten ausgeführt werden
+> Muss als T0-Administrator ausgeführt werden
 
 ```powershell
 # Script laden und Funktion aufrufen
@@ -79,6 +114,3 @@ Nach der Auswahl:
 
 > [!CAUTION]
 > Das Script zeigt LAPS-Passwörter im Klartext an. Verwenden Sie es nur in sicheren Umgebungen und stellen Sie sicher, dass der Bildschirm nicht einsehbar ist.
-
-> [!NOTE]
-> Die Tier-Zuweisung basiert auf einem spezifischen Schema. Bei abweichenden Namenskonventionen muss das Script entsprechend angepasst werden.
