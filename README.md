@@ -1,9 +1,9 @@
 # DSE Scriptvault
 
 > [!IMPORTANT]
-> _Letztes Update: 05.07.2025_\
-> _Gesamtanzahl Scripts: 8_ \
-> _Kategorien: 5_
+> _Letztes Update: 02.08.2025_\
+> _Gesamtanzahl Scripts: 9_ \
+> _Kategorien: 6_
 
 ### [01_HYPER-V](01_HYPER-V/)
 
@@ -46,4 +46,12 @@ Eine Sammlung von PowerShell-Tools für die effiziente Verwaltung von Windows De
 - **Verfügbare Scripts:**
   - `install-ESD-Converter.ps1`
 
-> _README.md Automatisch generiert am 05.07.2025 um 00:26:58 UTC_
+### [06_AD](06_AD/)
+
+Eine Sammlung von PowerShell-Tools für die effiziente Verwaltung von Active Directory und LAPS (Local Administrator Password Solution).
+
+- **Anzahl Scripts:** 1
+- **Verfügbare Scripts:**
+  - `laps-auslesen.ps1`
+
+> _README.md Automatisch generiert am 02.08.2025 um 10:34:17 UTC_
