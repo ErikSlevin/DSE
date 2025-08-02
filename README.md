@@ -54,4 +54,4 @@ Eine Sammlung von PowerShell-Tools für die effiziente Verwaltung von Active Dir
 - **Verfügbare Scripts:**
   - `laps-auslesen.ps1`
 
-> _README.md Automatisch generiert am 02.08.2025 um 12:09:13 UTC_
+> _README.md Automatisch generiert am 02.08.2025 um 12:10:56 UTC_
