@@ -7,6 +7,8 @@ on:
     paths:
       - '*/README.md'
       - '**/*.ps1'
+      - '**/*.md'  # Alle Markdown-Dateien
+      - '**/REDME.md'  # Falls wieder Tippfehler auftreten
   pull_request:
     branches: [ main, master ]
   workflow_dispatch: # Manueller Trigger
@@ -64,24 +66,42 @@ jobs:
                             return line.strip()
                 
                 return ""
-            except:
+            except Exception as e:
+                print(f"Fehler beim Lesen von {readme_path}: {e}")
                 return ""
+
+        def find_readme_file(directory):
+            """Findet README-Datei auch bei Tippfehlern"""
+            possible_names = ['README.md', 'readme.md', 'REDME.md', 'Readme.md']
+            for name in possible_names:
+                path = os.path.join(directory, name)
+                if os.path.exists(path):
+                    return path
+            return None
 
         # Repository-Struktur scannen
         categories = []
-        base_dirs = [d for d in os.listdir('.') if os.path.isdir(d) and not d.startswith('.') and d not in ['node_modules']]
+        base_dirs = [d for d in os.listdir('.') if os.path.isdir(d) and not d.startswith('.') 
+                     and d not in ['node_modules', '.git', '.github']]
+        
+        print(f"Gefundene Verzeichnisse: {base_dirs}")
         
         for directory in sorted(base_dirs):
-            readme_path = os.path.join(directory, 'README.md')
+            readme_path = find_readme_file(directory)
             script_count = count_ps1_files(directory)
             
-            if script_count > 0 or os.path.exists(readme_path):
-                description = extract_description_from_readme(readme_path)
+            print(f"Verzeichnis: {directory}")
+            print(f"  - README gefunden: {readme_path}")
+            print(f"  - Script-Anzahl: {script_count}")
+            
+            if script_count > 0 or readme_path:
+                description = extract_description_from_readme(readme_path) if readme_path else ""
                 categories.append({
                     'name': directory,
                     'description': description,
                     'script_count': script_count,
-                    'has_readme': os.path.exists(readme_path)
+                    'has_readme': readme_path is not None,
+                    'readme_path': readme_path
                 })
 
         # README-Inhalt generieren
@@ -133,7 +153,7 @@ jobs:
         print(f"Gefundene Kategorien: {len(categories)}")
         print(f"Gesamtanzahl Scripts: {total_scripts}")
         for cat in categories:
-            print(f"  - {cat['name']}: {cat['script_count']} Scripts")
+            print(f"  - {cat['name']}: {cat['script_count']} Scripts (README: {cat['readme_path']})")
         EOF
         
         python generate_readme.py
